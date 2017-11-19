@@ -1,0 +1,430 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"propu",
+				"propublica_data\tstatement"
+			],
+			[
+				"prior",
+				"priorBeliefs"
+			],
+			[
+				"ind",
+				"indices"
+			],
+			[
+				"Prio",
+				"PriorityQueueWithFunction\tclass"
+			],
+			[
+				"add_",
+				"add_position_recur"
+			],
+			[
+				"front",
+				"frontStringQueue"
+			],
+			[
+				"bigf",
+				"bigFmat"
+			],
+			[
+				"exp",
+				"exp_to_abstract_string"
+			],
+			[
+				"string_",
+				"string_of_bool"
+			],
+			[
+				"free",
+				"free_vars"
+			],
+			[
+				"rand",
+				"rand_pair_list"
+			],
+			[
+				"masses",
+				"masses_tests"
+			],
+			[
+				"Crawler",
+				"Crawler_services"
+			],
+			[
+				"string",
+				"string_of_int"
+			],
+			[
+				"order",
+				"orderedcoll"
+			],
+			[
+				"dist_p",
+				"dist_pts_from_pt"
+			],
+			[
+				"cont",
+				"contains_var"
+			],
+			[
+				"Windows",
+				"Windows10"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Markdown Preview/Markdown.sublime-build",
+					""
+				],
+				[
+					"Packages/SublimeREPL/sublimerepl_build_system_hack.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/Markdown Preview/Markdown.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 588.0,
+		"last_filter": "repl",
+		"selected_items":
+		[
+			[
+				"repl",
+				"SublimeREPL: Python"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"markdown",
+				"Build With: Markdown"
+			],
+			[
+				"pandoc",
+				"Pandoc"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"markdown pre",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"sublimerepl: oc",
+				"SublimeREPL: OCaml"
+			],
+			[
+				"",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 600.0
+	},
+	"console":
+	{
+		"height": 186.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/lhe/Documents/temp/hw5.py",
+		"/C/Users/lhe/cs182/cs182-f17-luranhe/HW5/grader.pyc",
+		"/C/Users/lhe/cs182/cs182-f17-luranhe/HW5/autograder.py",
+		"/C/Users/lhe/cs182/cs182-f17-luranhe/HW5/hw5.py",
+		"/C/Users/lhe/cs51/ps6-pokecanon/music.ml",
+		"/C/Users/lhe/cs182/cs182-f17-luranhe/HW2/sudoku.py",
+		"/C/Users/lhe/cs51/ps6-pokecanon/nativeLazyStreams.ml",
+		"/C/Users/lhe/cs182/cs182-f17-luranhe/HW4/rrt/util.py",
+		"/C/Users/lhe/cs182/cs182-f17-luranhe/HW4/tracking/util.py",
+		"/C/Users/lhe/cs182/cs182-f17-luranhe/HW4/rrt/rrt.py",
+		"/C/Users/lhe/cs182/cs182-f17-luranhe/HW4/tracking/bustersAgents.py",
+		"/C/Users/lhe/cs182/cs182-f17-luranhe/HW4/tracking/inference.py",
+		"/C/Users/lhe/cs124/prog3/numpart.ml",
+		"/C/Users/lhe/cs182/cs182-f17-luranhe/HW3/simulated_annealing.py",
+		"/C/Users/lhe/cs124/prog3/bench.ml",
+		"/C/Users/lhe/cs124/prog3/compare.ml",
+		"/C/Users/lhe/cs182/cs182-f17-luranhe/HW3/reinforcement/autograder.py",
+		"/C/Users/lhe/cs182/cs182-f17-luranhe/HW3/reinforcement/reinforcement.sublime-project",
+		"/C/Users/lhe/cs182/cs182-f17-luranhe/HW3/README.md",
+		"/C/Users/lhe/cs182/cs182-f17-luranhe/HW2/multiagent/multiAgents.py",
+		"/C/Users/lhe/cs182/cs182-f17-luranhe/HW2/handong/sudoku.py",
+		"/C/Users/lhe/AppData/Local/Temp/Temp1_tsp-0.0.1.zip/tsp-0.0.1/tsp.py",
+		"/C/Users/lhe/cs182/cs182-f17-luranhe/HW0/util.py",
+		"/C/Users/lhe/pythonpractice/hello.py",
+		"/C/Users/lhe/cs182/cs182-f17-luranhe/HW0/HW0.py",
+		"/C/Users/lhe/AppData/Roaming/Sublime Text 3/Packages/Anaconda/Anaconda.sublime-settings",
+		"/C/Users/lhe/Documents/temp/vatic/pairs.py",
+		"/C/Users/lhe/AppData/Roaming/Sublime Text 3/Packages/User/Anaconda.sublime-settings",
+		"/C/Users/lhe/Downloads/cs109a_hw0.ipynb",
+		"/C/Users/lhe/cs182/cs182-f17-luranhe/HW0/README.md",
+		"/C/Users/lhe/sea squirts/production/overview/_oasis",
+		"/C/Users/lhe/sea squirts/production/movie/multicellparams.ml",
+		"/C/Users/lhe/sea squirts/production/movie/solvers.ml",
+		"/C/Users/lhe/sea squirts/production/movie/multicellsolver.ml",
+		"/C/Users/lhe/sea squirts/production/overview/plotter.wls",
+		"/C/Users/lhe/Downloads/lhe@germain.math.harvard.edu",
+		"/C/Users/lhe/sea squirts/production/overview/plotter.m",
+		"/C/Users/lhe/sea squirts/production/overview/movie.ml",
+		"/C/Users/lhe/sea squirts/methods/multicellsolver.ml",
+		"/C/Users/lhe/sea squirts/methods/onecellsolver.ml",
+		"/C/Users/lhe/sea squirts/production/makefile",
+		"/C/Users/lhe/sea squirts/production/driver.ml",
+		"/C/Users/lhe/sea squirts/production/multicellparams.ml",
+		"/C/Users/lhe/sea squirts/production/multicellsolver.ml",
+		"/C/Users/lhe/sea squirts/production/movie.ml",
+		"/C/Users/lhe/sea squirts/production/_tags",
+		"/C/Users/lhe/sea squirts/production/solvers.ml",
+		"/C/Users/lhe/cs51/ps6-pokecanon/streamstrees.ml",
+		"/C/Users/lhe/cs51/ps6-pokecanon/refs.ml",
+		"/C/Users/lhe/sea squirts/methods/ft_compat/multicellparams.ml",
+		"/C/Users/lhe/sea squirts/methods/ft_compat/heatsolver.ml",
+		"/C/Users/lhe/sea squirts/methods/ft_compat/multicellsolver.ml",
+		"/C/Users/lhe/cs51/ps4-pokeheap/prioqueue.ml",
+		"/C/Users/lhe/sea squirts/methods/ft_compat/_tags",
+		"/C/Users/lhe/sea squirts/practice/parmap_example/mandels.ml",
+		"/C/Users/lhe/sea squirts/methods/ft_compat/solvers.ml",
+		"/C/Users/lhe/sea squirts/methods/solvers.ml",
+		"/C/Users/lhe/sea squirts/methods/ft_compat/onecellsolver.ml",
+		"/C/Users/lhe/sea squirts/methods/multicellparams.ml",
+		"/C/Users/lhe/sea squirts/practice/parmap_example/topnat.ml",
+		"/C/Users/lhe/sea squirts/practice/parmap_example/parallel_factor.ml",
+		"/C/Users/lhe/sea squirts/methods/newton.ml",
+		"/C/Users/lhe/sea squirts/methods/_tags",
+		"/C/Users/lhe/sea squirts/practice/parmap_example/_tags",
+		"/C/Users/lhe/sea squirts/methods/ft_compat/newton.ml",
+		"/C/Users/lhe/sea squirts/methods/ft_compat/multiscellsolver.ml",
+		"/C/Users/lhe/sea squirts/methods/ft_compat/heatparams.ml",
+		"/C/Users/lhe/sea squirts/methods/heatsolver.fs",
+		"/C/Users/lhe/sea squirts/test/hello.fs",
+		"/C/Users/lhe/sea squirts/methods/ft_compat/plotspecs.ml",
+		"/C/Users/lhe/sea squirts/methods/ft_compat/spiralsolver.ml",
+		"/C/Users/lhe/sea squirts/methods/ft_compat/spiralparams.ml",
+		"/C/Users/lhe/cs51/ps7-luranhe/graphdraw.ml",
+		"/C/Users/lhe/cs51/ps7-luranhe/owngraph.ml",
+		"/C/Users/lhe/sea squirts/methods/ft_compat/testmat.ml",
+		"/C/Users/lhe/sea squirts/methods/ft_compat/exnewton.ml",
+		"/C/Users/lhe/sea squirts/methods/ft_compat/testmat",
+		"/C/Users/lhe/sea squirts/methods/exnewton.ml",
+		"/C/Users/lhe/sea squirts/methods/onecellparams.ml",
+		"/C/Users/lhe/sea squirts/methods/vecMat.ml",
+		"/C/Users/lhe/sea squirts/practice/onecellEuler.ml",
+		"/C/Users/lhe/sea squirts/practice/1cellEuler.py",
+		"/C/Users/lhe/sea squirts/practice/1cell.py",
+		"/C/Users/lhe/cs51/ps7-luranhe/graphobj.ml",
+		"/C/Users/lhe/sea squirts/methods/euler.ml",
+		"/C/Users/lhe/sea squirts/methods/onecellsolver",
+		"/C/Users/lhe/sea squirts/practice/1cellEuler.ml",
+		"/C/Users/lhe/cs51/ps7-luranhe/makefile",
+		"/C/Users/lhe/cs51/project-luranhe/evaluation.ml",
+		"/C/Users/lhe/sea squirts/practice/1cellEuler",
+		"/C/Users/lhe/sea squirts/practice/1cell",
+		"/C/Users/lhe/pythonpractice/ML/gaussnaivebayes",
+		"/C/Users/lhe/cs51/ps7-luranhe/masses.ml",
+		"/C/Users/lhe/cs51/project-luranhe/writeup.md",
+		"/C/Users/lhe/cs124/prog3/heap.ml",
+		"/C/Users/lhe/cs51/project-luranhe/expr_tests.ml",
+		"/C/Users/lhe/cs51/project-luranhe/evaluation_tests.ml",
+		"/C/Users/lhe/cs51/project-luranhe/env_tests.ml",
+		"/C/Users/lhe/cs51/project-luranhe/miniml_parse.mly",
+		"/C/Users/lhe/cs51/project-luranhe/miniml_lex.mll",
+		"/C/Users/lhe/cs51/project-luranhe/expr_tests",
+		"/C/Users/lhe/cs51/ps7-luranhe/cS51.ml",
+		"/C/Users/lhe/cs51/ps7-luranhe/controls.ml",
+		"/C/Users/lhe/cs51/ps7-luranhe/testgraphs.ml",
+		"/C/Users/lhe/cs51/ps7-luranhe/masses_tests.ml",
+		"/C/Users/lhe/cs51/ps7-luranhe/points.ml",
+		"/C/Users/lhe/cs51/ps7-luranhe/points_tests.ml",
+		"/C/Users/lhe/cs51/ps7-luranhe/masses.mli",
+		"/C/Users/lhe/cs51/ps7-luranhe/testalign.ml",
+		"/C/Users/lhe/cs51/ps7-luranhe/testuniformcentered.ml",
+		"/C/Users/lhe/cs51/ps7-luranhe/points.mli",
+		"/C/Users/lhe/cs51/lab7-luranhe/lab7.ml",
+		"/C/Program Files/MiKTeX 2.9/tex/latex/mmacells/README.md",
+		"/C/Users/lhe/cs51/ps6-pokecanon/refs_test.ml",
+		"/C/Users/lhe/cs51/ps6-pokecanon/picalc.ml",
+		"/C/Users/lhe/cs51/lab6-luranhe/lab6.ml",
+		"/C/Users/lhe/cs124/prog2/strassen.ml",
+		"/C/Users/lhe/cs51/ps5-howdy-hao-he/askshiebs.ml",
+		"/C/Users/lhe/cs51/ps5-howdy-hao-he/crawl.ml",
+		"/C/Users/lhe/cs51/ps5-howdy-hao-he/myset.ml",
+		"/C/Users/lhe/cs51/ps5-howdy-hao-he/query.ml",
+		"/C/Users/lhe/cs51/ps5-howdy-hao-he/dict.ml",
+		"/C/Users/lhe/cs51/ps5-howdy-hao-he/cS51.ml",
+		"/C/Users/lhe/cs51/ps5-howdy-hao-he/http_services.ml",
+		"/C/Users/lhe/cs51/ps5-howdy-hao-he/graph.ml",
+		"/C/Users/lhe/cs51/ps5-howdy-hao-he/order.ml",
+		"/C/Users/lhe/cs51/ps5-howdy-hao-he/pagerank.ml",
+		"/C/Users/lhe/cs51/ps5-howdy-hao-he/makefile"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": false
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.markdown":
+	{
+		"height": 33.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 125.0
+	},
+	"pinned_build_system": "",
+	"project": "project.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\Users\\lhe\\cs124\\prog1\\randmst.ml"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 225.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+		"max_columns": 2
+	}
+}

@@ -1,19 +1,22 @@
+from collections import defaultdict
+from itertools import product
+
 class ComparableMixin:
 
-  def __eq__(self, other):
-    return not self < other and not other < self
+    def __eq__(self, other):
+        return not self < other and not other < self
 
-  def __ne__(self, other):
-    return not (self == other)
+    def __ne__(self, other):
+        return not (self == other)
 
-  def __gt__(self, other):
-    return other < self
+    def __gt__(self, other):
+        return other < self
 
-  def __ge__(self, other):
-    return not self < other
+    def __ge__(self, other):
+        return not self < other
 
-  def __le__(self, other):
-    return not other < self
+    def __le__(self, other):
+        return not other < self
 
 
 notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
@@ -21,8 +24,8 @@ to_let = dict(enumerate(notes, start=1))
 to_num = {v: k for k, v in to_let.iteritems()}
 
 def fix_num(n):
-  n = n % 7
-  return n + (not n) * 7
+    n = n % 7
+    return n + (not n) * 7
 
 
 class Note(ComparableMixin):
@@ -35,6 +38,7 @@ class Note(ComparableMixin):
         else:
             self.data = (octave, name)
             self.name = to_let(fix_num(name))
+        self.octave = self.data[0]
 
     def __lt__(self, other):
         return self.data < other.data
@@ -44,6 +48,11 @@ class Note(ComparableMixin):
 
     def __str__(self):
         return self.name + str(self.data[0])
+
+
+lims = {'tenor': (Note('A', 2), Note('F', 4)),
+        'alto': (Note('G', 3), Note('C', 5)),
+        'soprano': (Note('C', 4), Note('A', 5))}
 
 
 def all_about_that_bass(name, inversion):
@@ -74,3 +83,20 @@ def all_about_that_bass(name, inversion):
             return [[root, third, fifth], [root, fifth, fifth]]
         else:
             return [[root, root, fifth], [root, fifth, fifth]]
+
+def voice_generator(note_ingredients):
+    for i in note_ingredients:
+        voice = defaultdict(list)
+        #all possible notes for soprano, alto, and tenor
+        for name in i:
+            for octave in xrange(lims['tenor'][0].octave,
+                                 lims['soprano'][1].octave):
+                n = Note(name, octave)
+                for v, lim in lims.iteritems():
+                    lower, upper = lim
+                    if lower <= n <= upper:
+                        voice[v].append(n)
+
+        #generates all possible chords in voice range as tuples of (soprano, alto, tenor)
+        for s, a, t in product(voice['soprano'], voice['alto'], voice['tenor']):
+            yield (s, a, t)

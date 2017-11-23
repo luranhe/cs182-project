@@ -98,5 +98,5 @@ def voice_generator(note_ingredients):
                         voice[v].append(n)
 
         #generates all possible chords in voice range as tuples of (soprano, alto, tenor)
-        for s, a, t in product(voice['soprano'], voice['alto'], voice['tenor']):
-            yield (s, a, t)
+        for el in product(voice['soprano'], voice['alto'], voice['tenor']):
+            yield el

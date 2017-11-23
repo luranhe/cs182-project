@@ -37,7 +37,7 @@ class Note(ComparableMixin):
             self.name = name
         else:
             self.data = (octave, name)
-            self.name = to_let(fix_num(name))
+            self.name = to_let[fix_num(name)]
         self.octave = self.data[0]
 
     def __lt__(self, other):

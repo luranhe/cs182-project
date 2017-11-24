@@ -1,4 +1,4 @@
-from prelims import lims
+from prelims import *
 
 def vertical_tester(bass, tenor, alto, soprano):
     treble_voices = [tenor, alto, soprano]

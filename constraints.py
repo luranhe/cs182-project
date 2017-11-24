@@ -1,3 +1,5 @@
+from prelims import lims
+
 def vertical_tester(bass, tenor, alto, soprano):
     treble_voices = [tenor, alto, soprano]
     treble_names = ['tenor', 'alto', 'soprano']
@@ -7,11 +9,7 @@ def vertical_tester(bass, tenor, alto, soprano):
             return False
 
     # check to make sure voices never cross
-    if tenor <= bass:
-        return False
-    if alto <= tenor:
-        return False
-    if soprano <= alto:
+    if not soprano <= alto <= tenor <= bass:
         return False
 
     # check to make sure spacing never exceeds an octave between upper 3 voices

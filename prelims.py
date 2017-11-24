@@ -80,9 +80,11 @@ def all_about_that_bass(name, inversion):
             return [[root, third, fifth], [root, root, fifth]]
     if root in (1, 4):
         if inversion == 0:
-            return [[root, third, fifth], [third, fifth, fifth], [third, third, fifth]]
+            return [[root, third, fifth], [third, fifth, fifth],
+                    [third, third, fifth]]
         else:
-            return [[root, root, fifth], [root, fifth, fifth], [root, third, fifth]]
+            return [[root, root, fifth], [root, fifth, fifth],
+                    [root, third, fifth]]
     else:
         if inversion == 0:
             return [[root, third, fifth], [root, fifth, fifth]]
@@ -101,6 +103,6 @@ def voice_generator(note_ingredients):
                     lower, upper = lim
                     if lower <= n <= upper:
                         voice[v].append(n)
-        #generates all possible chords in voice range as tuples of (soprano, alto, tenor)
+        # generates all possible chords in voice range as SAT tuples
         for el in product(*(voice[v] for v in voices[:-1])):
             yield el

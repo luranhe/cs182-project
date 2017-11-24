@@ -46,6 +46,9 @@ class Note(ComparableMixin):
     def __eq__(self, other):
         return self.data == other.data
 
+    def __sub__(self, other):
+        return self.octave * 7 + self.data[0] - other.octave * 7 - other.data[0]
+
     def __str__(self):
         return self.name + str(self.data[0])
 
@@ -53,6 +56,8 @@ class Note(ComparableMixin):
 lims = {'tenor': (Note('A', 2), Note('F', 4)),
         'alto': (Note('G', 3), Note('C', 5)),
         'soprano': (Note('C', 4), Note('A', 5))}
+
+voices = ['soprano', 'alto', 'tenor', 'bass']
 
 
 def all_about_that_bass(name, inversion):
@@ -97,5 +102,5 @@ def voice_generator(note_ingredients):
                     if lower <= n <= upper:
                         voice[v].append(n)
         #generates all possible chords in voice range as tuples of (soprano, alto, tenor)
-        for el in product(voice['soprano'], voice['alto'], voice['tenor']):
+        for el in product(*(voice[v] for v in voices[:-1])):
             yield el

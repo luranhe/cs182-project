@@ -46,6 +46,7 @@ def find_chords(bassline):
             random.shuffle(poss)
             it = iter(poss)
             possibilities.append(it)
+
         # try to assign a value to the previous chord, backtracking if failing
         try:
             curr_note = bassline[i].data[1]
@@ -61,3 +62,6 @@ def find_chords(bassline):
             possibilities.pop()
             i -= 1
     return chords[::-1]
+
+def voice_leading(bassline, chords):
+    pass

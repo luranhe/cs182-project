@@ -47,7 +47,9 @@ class Note(ComparableMixin):
         return self.data == other.data
 
     def __sub__(self, other):
-        return self.octave * 7 + self.data[0] - other.octave * 7 - other.data[0]
+        assert self >= other
+        d = self.octave * 7 + self.data[0] - other.octave * 7 - other.data[0]
+        return d + 1
 
     def __str__(self):
         return self.name + str(self.data[0])

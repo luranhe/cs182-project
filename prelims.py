@@ -48,7 +48,7 @@ class Note(ComparableMixin):
 
     def __sub__(self, other):
         assert self >= other
-        d = self.octave * 7 + self.data[0] - other.octave * 7 - other.data[0]
+        d = self.octave * 7 + self.data[1] - other.octave * 7 - other.data[1]
         return d + 1
 
     def __str__(self):
@@ -96,7 +96,7 @@ def all_about_that_bass(name, inversion):
 def voice_generator(note_ingredients):
     for i in note_ingredients:
         voice = defaultdict(list)
-        #all possible notes for soprano, alto, and tenor
+        # all possible notes for soprano, alto, and tenor
         for name in i:
             for octave in xrange(lims['tenor'][0].octave,
                                  lims['soprano'][1].octave):

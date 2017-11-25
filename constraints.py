@@ -1,5 +1,5 @@
 from itertools import combinations
-from prelims import *
+from prelims import fix_num
 
 def vertical_tester(satb):
     soprano, alto, tenor, bass = satb

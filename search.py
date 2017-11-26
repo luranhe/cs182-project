@@ -43,8 +43,7 @@ def find_chords(bassline):
             possibilities.append(it)
         # try to assign a value to the previous chord, backtracking if failing
         try:
-            curr_note = bassline[i].num
-            prev_chord = ifilter(lambda n: curr_note in notes_in_chord[n],
+            prev_chord = ifilter(lambda n: bassline[i].num in notes_in_chord[n],
                                  it).next()
             try:
                 chords[i] = prev_chord

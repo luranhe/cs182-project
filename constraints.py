@@ -25,10 +25,14 @@ class ConstraintsAgg:
 
     def test(self, satbs):
         n = len(satbs)
-        return (all(f(*satbs) for f in self.basics if n == 1) and
-                all(f(first, second)
-                    for first, second in combinations(izip(*satbs), 2)
-                    for f in self.voice_pairs[n] if n in self.voice_pairs))
+        if n in self.voice_pairs:
+            for first, second in combinations(izip(*satbs), 2):
+                if not all(f(first, second) for f in self.voice_pairs[n]):
+                    return False
+        if n == 1:
+            if not all(f(*satbs) for f in self.basics):
+                return False
+        return True
 
 
 bach = ConstraintsAgg([crossvoice, spacing], {2: [parallel(5), parallel(8)]})

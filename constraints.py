@@ -4,16 +4,15 @@ from prelims import fix_num, voices
 def crossvoice(satb):
     # check to make sure voices never cross
     soprano, alto, tenor, bass = satb
-    return soprano > alto > tenor > bass
+    return all(i > j for i, j in izip(satb[:-1], satb[1:]))
 
 def spacing(satb):
     # check to make sure spacing never exceeds an octave between upper 3 voices
-    treble_voices = satb[:-1]
-    return all(i - j < 8 for i, j in zip(treble_voices[:-1], treble_voices[1:]))
+    return all(i - j < 8 for i, j in izip(satb[:-2], satb[1:-1]))
 
 def parallel(n):
     return lambda first, second: not all(fix_num(f - s) == n
-                                         for f, s in zip(first, second))
+                                         for f, s in izip(first, second))
 
 
 class ConstraintsAgg:
@@ -21,10 +20,10 @@ class ConstraintsAgg:
     def __init__(self, basics, voice_pairs):
         self.basics = basics
         self.voice_pairs = voice_pairs
-        self.ns = voice_pairs.keys()
-        self.ns.append(1)
+        self.ns = [1]
+        self.ns.extend(voice_pairs.keys())
 
-    def test(self, *satbs):
+    def test(self, satbs):
         n = len(satbs)
         if n == 1:
             if not all(f(*satbs) for f in self.basics):

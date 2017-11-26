@@ -38,7 +38,7 @@ class Note(ComparableMixin):
         else:
             self.data = (octave, name)
             self.name = to_let[fix_num(name)]
-        self.octave = self.data[0]
+        self.octave, self.num = self.data
 
     def __lt__(self, other):
         return self.data < other.data
@@ -92,8 +92,8 @@ def all_about_that_bass(name, inversion):
         else:
             return [[root, root, fifth], [root, fifth, fifth]]
 
-def voice_generator(note_ingredients):
-    for i in note_ingredients:
+def voice_generator(name, inversion):
+    for i in all_about_that_bass(name, inversion):
         voice = defaultdict(list)
         # all possible notes for soprano, alto, and tenor
         for name in i:

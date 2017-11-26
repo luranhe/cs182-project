@@ -1,6 +1,6 @@
 from random import shuffle
-from itertools import ifilter
-from prelims import fix_num
+from itertools import ifilter, izip
+from prelims import fix_num, voice_generator
 
 class NoSatisfaction(Exception):
     pass
@@ -13,46 +13,39 @@ successors = {1: range(1, 8),
               6: [2, 4, 5, 7],
               7: [1, 5, 6]}
 
-predecessors = {i: [j for j in range(1, 8) if i in successors[j]]
-                for i in range(1, 8)}
+predecessors = {i: [j for j in xrange(1, 8) if i in successors[j]]
+                for i in xrange(1, 8)}
+
+notes_in_chord = {c: frozenset(fix_num(c + 2 * i) for i in xrange(3))
+                  for c in xrange(1, 8)}
 
 def find_chords(bassline):
     bassline = bassline[::-1]
     chords = []
-
     # acceptable cadences
     possibilities = [iter([1]), iter([5, 4])]
     i = 0
     n = len(bassline)
-
+    ex = NoSatisfaction('No possible chord sequence')
     # Bach voice leading rules don't make sense for n < 2
     if n < 2:
-        raise NoSatisfaction('No possible chord sequence')
+        raise ex
     while i < n:
-
         # get the possible previous chords
         try:
             it = possibilities[i]
         except IndexError:
-            try:
-                next_chord = chords[i - 1]
-
-            # if i < 0, that means all possibilities have been exhausted
-            except IndexError:
-                raise NoSatisfaction('No possible chord sequence')
+            next_chord = chords[i - 1]
             poss = predecessors[next_chord][:]
-
             # shuffling gives nondeterministic behavior
             shuffle(poss)
             it = iter(poss)
             possibilities.append(it)
-
         # try to assign a value to the previous chord, backtracking if failing
         try:
-            curr_note = bassline[i].data[1]
-            prev_chord = ifilter(lambda n: curr_note
-                                 in [fix_num(n + 2 * i)
-                                     for i in xrange(3)], it).next()
+            curr_note = bassline[i].num
+            prev_chord = ifilter(lambda n: curr_note in notes_in_chord[n],
+                                 it).next()
             try:
                 chords[i] = prev_chord
             except IndexError:
@@ -61,7 +54,39 @@ def find_chords(bassline):
         except StopIteration:
             possibilities.pop()
             i -= 1
+            # if all possibilities have been exhausted
+            if i < 0:
+                raise ex
     return chords[::-1]
 
 def voice_leading(bassline, chords, constraints):
-    pass
+    n = len(bassline)
+    assert n == len(chords)
+    inversion = [fix_num(b.num - chord) for b, chord in izip(bassline, chords)]
+    possibilities = []
+    music = []
+    i = 0
+    while i < n:
+        b = bassline[i]
+        try:
+            gen = possibilities[i]
+        except IndexError:
+            gen = voice_generator(b.num, inversion[i])
+            possibilities.append(gen)
+        try:
+            while True:
+                sat = gen.next()
+                music.append(sat + (b,))
+                if all(constraints.test(music[i - num + 1:i + 1])
+                       for num in constraints.ns if i + 1 >= num):
+                    i += 1
+                    break
+                else:
+                    music.pop()
+        except StopIteration:
+            music.pop()
+            possibilities.pop()
+            i -= 1
+            if i < 0:
+                raise NoSatisfaction('No valid voice leading')
+    return music

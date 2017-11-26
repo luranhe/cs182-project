@@ -68,15 +68,16 @@ def voice_leading(bassline, chords, constraints):
     i = 0
     while i < n:
         b = bassline[i]
+        # get possible combos
         try:
             gen = possibilities[i]
         except IndexError:
             gen = voice_generator(b.num, inversion[i])
             possibilities.append(gen)
+        # find a combo that satisfies the constraints, backtracking if failing
         try:
             while True:
-                sat = gen.next()
-                music.append(sat + (b,))
+                music.append(gen.next() + (b,))
                 if all(constraints.test(music[i - num + 1:i + 1])
                        for num in constraints.ns if i + 1 >= num):
                     i += 1
@@ -87,6 +88,7 @@ def voice_leading(bassline, chords, constraints):
             music.pop()
             possibilities.pop()
             i -= 1
+            # if all possibilities have been exhausted
             if i < 0:
                 raise NoSatisfaction('No valid voice leading')
     return music

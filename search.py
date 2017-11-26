@@ -35,9 +35,6 @@ def find_chords(bassline):
         try:
             it = possibilities[i]
         except IndexError:
-            # check if all possibilities have been exhausted
-            if i <= 0:
-                raise ex
             next_chord = chords[i - 1]
             poss = predecessors[next_chord][:]
             # shuffling gives nondeterministic behavior
@@ -48,12 +45,14 @@ def find_chords(bassline):
         try:
             prev_chord = ifilter(lambda n: bassline[i].num in notes_in_chord[n],
                                  it).next()
-            try:
-                chords[i] = prev_chord
-            except IndexError:
-                chords.append(prev_chord)
+            chords.append(prev_chord)
             i += 1
         except StopIteration:
+            try:
+                chords.pop()
+            # if all possibilities have been exhausted
+            except IndexError:
+                raise ex
             possibilities.pop()
             i -= 1
     return chords[::-1]

@@ -1,6 +1,6 @@
 from random import shuffle
 from itertools import ifilter, izip
-from prelims import fix_num, voice_generator
+from prelims import fix_num, all_about_that_bass, voice_generator
 
 class NoSatisfaction(Exception):
     pass
@@ -62,22 +62,22 @@ def find_chords(bassline):
 def voice_leading(bassline, chords, constraints):
     n = len(bassline)
     assert n == len(chords)
-    inversion = [fix_num(b.num - chord) for b, chord in izip(bassline, chords)]
+    recipes = [all_about_that_bass(b.num, fix_num(b.num - chord) / 2)
+               for b, chord in izip(bassline, chords)]
     possibilities = []
     music = []
     i = 0
     while i < n:
-        b = bassline[i]
         # get possible combos
         try:
             gen = possibilities[i]
         except IndexError:
-            gen = voice_generator(b.num, inversion[i])
+            gen = voice_generator(recipes[i])
             possibilities.append(gen)
         # find a combo that satisfies the constraints, backtracking if failing
         try:
             while True:
-                music.append(gen.next() + (b,))
+                music.append(gen.next() + (bassline[i],))
                 if all(constraints.test(music[i - num + 1:i + 1])
                        for num in constraints.ns if i + 1 >= num):
                     i += 1

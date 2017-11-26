@@ -92,8 +92,8 @@ def all_about_that_bass(name, inversion):
         else:
             return [[root, root, fifth], [root, fifth, fifth]]
 
-def voice_generator(name, inversion):
-    for i in all_about_that_bass(name, inversion):
+def voice_generator(note_recipe):
+    for i in note_recipe:
         voice = defaultdict(list)
         # all possible notes for soprano, alto, and tenor
         for name in i:

@@ -61,7 +61,6 @@ lims = {'tenor': (Note('A', 2), Note('F', 4)),
 
 voices = ['soprano', 'alto', 'tenor', 'bass']
 
-
 def all_about_that_bass(name, inversion):
     root = fix_num(name - inversion * 2)
     third = fix_num(root + 2)

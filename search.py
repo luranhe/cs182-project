@@ -1,4 +1,4 @@
-import random
+from random import shuffle
 from itertools import ifilter
 from prelims import fix_num
 
@@ -43,7 +43,7 @@ def find_chords(bassline):
             poss = predecessors[next_chord][:]
 
             # shuffling gives nondeterministic behavior
-            random.shuffle(poss)
+            shuffle(poss)
             it = iter(poss)
             possibilities.append(it)
 
@@ -63,5 +63,5 @@ def find_chords(bassline):
             i -= 1
     return chords[::-1]
 
-def voice_leading(bassline, chords):
+def voice_leading(bassline, chords, constraints):
     pass

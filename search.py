@@ -35,6 +35,9 @@ def find_chords(bassline):
         try:
             it = possibilities[i]
         except IndexError:
+            # check if all possibilities have been exhausted
+            if i <= 0:
+                raise ex
             next_chord = chords[i - 1]
             poss = predecessors[next_chord][:]
             # shuffling gives nondeterministic behavior
@@ -53,9 +56,6 @@ def find_chords(bassline):
         except StopIteration:
             possibilities.pop()
             i -= 1
-            # if all possibilities have been exhausted
-            if i < 0:
-                raise ex
     return chords[::-1]
 
 def voice_leading(bassline, chords, constraints):

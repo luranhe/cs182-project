@@ -73,9 +73,10 @@ def voice_leading(bassline, chords, constraints):
             gen = voice_generator(recipes[i])
             possibilities.append(gen)
         # find a combo that satisfies the constraints, backtracking if failing
+        b = bassline[i]
         try:
             while True:
-                music.append(gen.next() + (bassline[i],))
+                music.append(gen.next() + (b,))
                 if all(constraints.test(music[i - num + 1:i + 1])
                        for num in constraints.ns if i + 1 >= num):
                     i += 1

@@ -21,7 +21,7 @@ class ConstraintsAgg:
         self.basics = basics
         self.voice_pairs = voice_pairs
         self.ns = [1]
-        self.ns.extend(voice_pairs.keys())
+        self.ns.extend(voice_pairs.iterkeys())
 
     def test(self, satbs):
         n = len(satbs)

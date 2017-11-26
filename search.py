@@ -20,12 +20,12 @@ notes_in_chord = {c: frozenset(fix_num(c + 2 * i) for i in xrange(3))
                   for c in xrange(1, 8)}
 
 def find_chords(bassline):
-    bassline = bassline[::-1]
+    bass = [b.num for b in bassline[::-1]]
     chords = []
     # acceptable cadences
     possibilities = [iter([1]), iter([5, 4])]
     i = 0
-    n = len(bassline)
+    n = len(bass)
     ex = NoSatisfaction('No possible chord sequence')
     # Bach voice leading rules don't make sense for n < 2
     if n < 2:
@@ -33,18 +33,18 @@ def find_chords(bassline):
     while i < n:
         # get the possible previous chords
         try:
-            it = possibilities[i]
+            gen = possibilities[i]
         except IndexError:
             next_chord = chords[i - 1]
             poss = predecessors[next_chord][:]
             # shuffling gives nondeterministic behavior
             shuffle(poss)
-            it = iter(poss)
-            possibilities.append(it)
+            gen = iter(poss)
+            possibilities.append(gen)
         # try to assign a value to the previous chord, backtracking if failing
         try:
-            prev_chord = ifilter(lambda n: bassline[i].num in notes_in_chord[n],
-                                 it).next()
+            b = bass[i]
+            prev_chord = next(n for n in gen if b in notes_in_chord[n])
             chords.append(prev_chord)
             i += 1
         except StopIteration:

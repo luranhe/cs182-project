@@ -1,0 +1,8 @@
+from prelims import Note
+from constraints import bach
+from search import *
+l = [Note('C', 3), Note('D', 3), Note('E', 3), Note('G', 2), Note('C', 3)]
+f = FindChords(l)
+chords = DFSSolve(f)
+v = VoiceLeading(l, chords, bach)
+voiced = DFSSolve(v)

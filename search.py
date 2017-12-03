@@ -111,13 +111,15 @@ def DFSSolve(problem):
     i = 0
     res = []
     possibilities = problem.start()
+    if len(possibilities) < problem.depth:
+        raise problem.fail
     while i < problem.depth:
         try:
             gen = possibilities[i]
         except IndexError:
-            if i > 0:
+            try:
                 gen = problem.succ_gen(i, res[i - 1])
-            else:
+            except IndexError:
                 gen = problem.succ_gen(i, None)
         try:
             while True:

@@ -1,9 +1,12 @@
 from random import shuffle
-from itertools import ifilter, izip
+from itertools import imap, izip
+from abc import ABCMeta, abstractmethod, abstractproperty
 from prelims import fix_num, all_about_that_bass, voice_generator
+
 
 class NoSatisfaction(Exception):
     pass
+
 
 successors = {1: range(1, 8),
               2: [5, 7],
@@ -19,75 +22,115 @@ predecessors = {i: [j for j in xrange(1, 8) if i in successors[j]]
 notes_in_chord = {c: frozenset(fix_num(c + 2 * i) for i in xrange(3))
                   for c in xrange(1, 8)}
 
-def find_chords(bassline):
-    bass = [b.num for b in bassline[::-1]]
-    chords = []
-    # acceptable cadences
-    possibilities = [iter([1]), iter([5, 4])]
-    i = 0
-    n = len(bass)
-    ex = NoSatisfaction('No possible chord sequence')
-    # Bach voice leading rules don't make sense for n < 2
-    if n < 2:
-        raise ex
-    while i < n:
-        # get the possible previous chords
-        try:
-            gen = possibilities[i]
-        except IndexError:
-            next_chord = chords[i - 1]
-            poss = predecessors[next_chord][:]
-            # shuffling gives nondeterministic behavior
-            shuffle(poss)
-            gen = iter(poss)
-            possibilities.append(gen)
-        # try to assign a value to the previous chord, backtracking if failing
-        try:
-            b = bass[i]
-            prev_chord = next(n for n in gen if b in notes_in_chord[n])
-            chords.append(prev_chord)
-            i += 1
-        except StopIteration:
-            try:
-                chords.pop()
-            # if all possibilities have been exhausted
-            except IndexError:
-                raise ex
-            possibilities.pop()
-            i -= 1
-    return chords[::-1]
 
-def voice_leading(bassline, chords, constraints):
-    n = len(bassline)
-    assert n == len(chords)
-    recipes = [all_about_that_bass(b.num, fix_num(b.num - chord) / 2)
-               for b, chord in izip(bassline, chords)]
-    possibilities = []
-    music = []
+class Problem:
+    __metaclass__ = ABCMeta
+
+    @abstractmethod
+    def start(self):
+        pass
+
+    @abstractproperty
+    def depth(self):
+        pass
+
+    @abstractmethod
+    def succ_gen(self):
+        pass
+
+    @abstractmethod
+    def constraints(self):
+        pass
+
+    @abstractmethod
+    def to_output(self):
+        pass
+
+    @abstractproperty
+    def fail(self):
+        pass
+
+
+class FindChords(Problem):
+    fail = NoSatisfaction('No possible chord sequence')
+    depth = None
+
+    def __init__(self, bassline):
+        self.bassline = [b.num for b in bassline[::-1]]
+        self.depth = len(self.bassline)
+
+    def start(self):
+        return [iter([1]), iter([5, 4])]
+
+    def succ_gen(self, i, next_chord):
+        try:
+            poss = predecessors[next_chord][:]
+            shuffle(poss)
+            return iter(poss)
+        except KeyError:
+            assert next_chord is None
+            raise self.fail
+
+    def constraints(self, res):
+        i = len(res) - 1
+        return self.bassline[i] in notes_in_chord[res[i]]
+
+    def to_output(self, res):
+        return res[::-1]
+
+
+class VoiceLeading(Problem):
+    fail = NoSatisfaction('No valid voice leading')
+    depth = None
+
+    def __init__(self, bassline, chords, consts):
+        self.depth = len(bassline)
+        assert self.depth == len(chords)
+        self.bassline = bassline
+        self.recipes = [all_about_that_bass(b.num, fix_num(b.num - chord) / 2)
+                        for b, chord in izip(bassline, chords)]
+        self.consts = consts
+
+    def start(self):
+        return []
+
+    def succ_gen(self, i, _):
+        gen = voice_generator(self.recipes[i])
+        return imap(lambda g: g + (self.bassline[i],), gen)
+
+    def constraints(self, res):
+        i = len(res)
+        return all(self.consts.test(res[i - num:])
+                   for num in self.consts.ns if i >= num)
+
+    def to_output(self, res):
+        return res
+
+
+def DFSSolve(problem):
     i = 0
-    while i < n:
-        # get possible combos
+    res = []
+    possibilities = problem.start()
+    while i < problem.depth:
         try:
             gen = possibilities[i]
         except IndexError:
-            gen = voice_generator(recipes[i])
-            possibilities.append(gen)
-        # find a combo that satisfies the constraints, backtracking if failing
-        b = bassline[i]
+            if i > 0:
+                gen = problem.succ_gen(i, res[i - 1])
+            else:
+                gen = problem.succ_gen(i, None)
         try:
             while True:
-                music.append(gen.next() + (b,))
-                if all(constraints.test(music[i - num + 1:i + 1])
-                       for num in constraints.ns if i + 1 >= num):
+                res.append(gen.next())
+                if problem.constraints(res):
                     i += 1
                     break
                 else:
-                    music.pop()
+                    res.pop()
         except StopIteration:
-            music.pop()
-            possibilities.pop()
             i -= 1
-            # if all possibilities have been exhausted
             if i < 0:
-                raise NoSatisfaction('No valid voice leading')
-    return music
+                raise problem.fail
+            possibilities.pop()
+            res.pop()
+    return problem.to_output(res)

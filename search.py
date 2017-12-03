@@ -111,7 +111,7 @@ def DFSSolve(problem):
     i = 0
     res = []
     possibilities = problem.start()
-    if len(possibilities) < problem.depth:
+    if len(possibilities) > problem.depth:
         raise problem.fail
     while i < problem.depth:
         try:

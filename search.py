@@ -62,7 +62,7 @@ class FindChords(Problem):
     def start(self):
         return [iter([1]), iter([5, 4])]
 
-    def succ_gen(self, i, next_chord):
+    def succ_gen(self, _, next_chord):
         try:
             poss = predecessors[next_chord][:]
             shuffle(poss)

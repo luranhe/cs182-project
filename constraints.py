@@ -28,8 +28,8 @@ class ConstraintsAgg:
         self.basics = basics
         self.voice_pairs = voice_pairs
         self.voice_singles = voice_singles
-        self.ns = ({1} | set(voice_pairs.iterkeys()) |
-                   set(voice_singles.iterkeys()))
+        self.ns = frozenset({1} | set(voice_pairs.iterkeys()) |
+                            set(voice_singles.iterkeys()))
 
     def test(self, satbs):
         n = len(satbs)

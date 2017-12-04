@@ -121,6 +121,10 @@ def DFSSolve(problem):
                 gen = problem.succ_gen(i, res[i - 1])
             except IndexError:
                 gen = problem.succ_gen(i, None)
+            try:
+                possibilities[i] = gen
+            except IndexError:
+                possibilities.append(gen)
         try:
             while True:
                 res.append(gen.next())
@@ -133,6 +137,7 @@ def DFSSolve(problem):
             i -= 1
             if i < 0:
                 raise problem.fail
-            possibilities.pop()
+            if i + 2 == len(possibilities):
+                possibilities.pop()
             res.pop()
     return problem.to_output(res)

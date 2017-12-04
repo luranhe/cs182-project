@@ -1,5 +1,5 @@
 from collections import defaultdict
-from itertools import product
+from itertools import izip, product, permutations
 
 class ComparableMixin:
 
@@ -94,16 +94,12 @@ def all_about_that_bass(name, inversion):
 
 def voice_generator(note_recipe):
     for i in note_recipe:
-        voice = defaultdict(list)
-        # all possible notes for soprano, alto, and tenor
-        for name in i:
-            for octave in xrange(lims['tenor'][0].octave,
-                                 lims['soprano'][1].octave):
-                n = Note(name, octave)
-                for v, lim in lims.iteritems():
-                    lower, upper = lim
-                    if lower <= n <= upper:
-                        voice[v].append(n)
-        # generates all possible chords in voice range as SAT tuples
-        for el in product(*(voice[v] for v in voices[:-1])):
-            yield el
+        for p in permutations(i):
+            voice = defaultdict(list)
+            for n, v in izip(p, voices):
+                for o in xrange(lims[v][0].octave, lims[v][1].octave + 1):
+                    note = Note(n, o)
+                    if lims[v][0] <= note <= lims[v][1]:
+                        voice[v].append(note)
+            for sat in product(*(voice[v] for v in voices[:-1])):
+                yield sat

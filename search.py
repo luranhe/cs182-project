@@ -87,7 +87,7 @@ class VoiceLeading(Problem):
         self.depth = len(bassline)
         assert self.depth == len(chords)
         self.bassline = bassline
-        self.recipes = [all_about_that_bass(b.num, fix_num(b.num - chord) / 2)
+        self.recipes = [all_about_that_bass(b.num, ((b.num - chord) % 7) / 2)
                         for b, chord in izip(bassline, chords)]
         self.consts = consts
 
@@ -121,10 +121,7 @@ def DFSSolve(problem):
                 gen = problem.succ_gen(i, res[i - 1])
             except IndexError:
                 gen = problem.succ_gen(i, None)
-            try:
-                possibilities[i] = gen
-            except IndexError:
-                possibilities.append(gen)
+            possibilities.append(gen)
         try:
             while True:
                 res.append(gen.next())
@@ -134,10 +131,9 @@ def DFSSolve(problem):
                 else:
                     res.pop()
         except StopIteration:
-            i -= 1
-            if i < 0:
+            if i < 0 or i + 1 != len(possibilities):
                 raise problem.fail
-            if i + 2 == len(possibilities):
-                possibilities.pop()
+            i -= 1
+            possibilities.pop()
             res.pop()
     return problem.to_output(res)

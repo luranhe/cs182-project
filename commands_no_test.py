@@ -53,21 +53,7 @@ bass_6 = [Note('C', 2), Note('G', 2), Note('A', 2), Note('F', 2), Note('G', 2),
 find_6 = FindChords(bass_6)
 chords_6 = DFSSolve(find_6)
 v_6 = VoiceLeading(bass_6, chords_6, bach)
-voiced_6 = DFSSolve(v_6)
-
-bass_lines = [bass_1, bass_2, bass_3, bass_4, bass_5, bass_6]
-for x in range(0, 9999):
-    for bass_l in bass_lines:
-        find_l = FindChords(bass_l)
-        chords_l = DFSSolve(find_l)
-        v_l = VoiceLeading(bass_l, chords_l, bach)
-        voiced_l = DFSSolve(v_l)
-
-end_time = time.time()
-elapsed = end_time - start_time
-print('Total time elapsed: ' + str(elapsed) + ' seconds')
-print('Total chorales voiced: 60000')
-print('Average voicing time: ' + str((elapsed / 60000.) * 1000) + ' ms')    
+voiced_6 = DFSSolve(v_6)   
 
 '''
 # from BWV 178: Wo Gott der Herr nicht bei uns halt

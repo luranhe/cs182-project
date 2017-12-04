@@ -1,39 +1,38 @@
-from itertools import combinations
-from prelims import fix_num
+from itertools import combinations, izip
+from prelims import fix_num, voices
 
-constraints_dict = {}
-
-def cross_tester(satb):
-    soprano, alto, tenor, bass = satb
+def crossvoice(satb):
     # check to make sure voices never cross
-    if not soprano > alto > tenor > bass:
-        return False
-    return True
+    soprano, alto, tenor, bass = satb
+    return all(i > j for i, j in izip(satb[:-1], satb[1:]))
 
-def spacing_tester(satb):
-    treble_voices = satb[:-1]
-    treble_names = voices[:-1]
+def spacing(satb):
     # check to make sure spacing never exceeds an octave between upper 3 voices
-    for i, j in zip(treble_voices[:-1], treble_voices[1:]):
-        if i - j >= 8:
-            return False
-    # if all goes well, return True
-    return True
+    return all(i - j < 8 for i, j in izip(satb[:-2], satb[1:-1]))
 
-constraints_dict[1] = [cross_tester, spacing_tester]
+def parallel(n):
+    return lambda first, second: not all(fix_num(f - s) == n
+                                         for f, s in izip(first, second))
 
-def horizontal_tester(satb1, satb2):
-    paired_voices = zip(satb1, satb2)
-    for first, second in combinations(paired_voices, 2):
-        # parallel octaves
-        if all(f.name == s.name for f, s in zip(first, second)):
-            return False
-        # parallel fifths
-        if all(fix_num(f - s) == 5 for f, s in zip(first, second)):
-            return False
-    return True
 
-    # if all goes well, return True
-    return True
+class ConstraintsAgg:
 
-constraints_dict[2] = [horizontal_tester]
+    def __init__(self, basics, voice_pairs):
+        self.basics = basics
+        self.voice_pairs = voice_pairs
+        self.ns = [1]
+        self.ns.extend(voice_pairs.iterkeys())
+
+    def test(self, satbs):
+        n = len(satbs)
+        if n in self.voice_pairs:
+            for first, second in combinations(izip(*satbs), 2):
+                if not all(f(first, second) for f in self.voice_pairs[n]):
+                    return False
+        if n == 1:
+            if not all(f(*satbs) for f in self.basics):
+                return False
+        return True
+
+
+bach = ConstraintsAgg([crossvoice, spacing], {2: [parallel(5), parallel(8)]})

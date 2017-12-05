@@ -9,11 +9,8 @@ for chord in voiced_1:
     for i, note in enumerate(chord):
         octave = note.octave
         name = str.lower(note.name)
-        if octave > 3:
-            name += "'" * (octave - 3)
-        elif octave < 3:
-            name += "," * (3 - octave)
-        name += "4 "
+        name += ("'" * (octave - 3) * (octave > 3) +
+                 "," * (3 - octave) * (octave < 3) + "4 ")
 
         #builds the voices
         satb[i] += name

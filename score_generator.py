@@ -1,11 +1,14 @@
+from sys import argv
 import abjad
 from itertools import izip
 from commands_no_test import *
 
+n = int(argv[1]) - 1
+
 #right format
 notes = []
 satb = [""] * 4
-for chord in voiced_1:
+for chord in voiced[n]:
     for i, note in enumerate(chord):
         octave = note.octave
         name = str.lower(note.name)

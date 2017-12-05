@@ -1,7 +1,7 @@
 from sys import argv
 import abjad
 from itertools import izip
-from commands_no_test import *
+from tests import voiced
 
 n = int(argv[1]) - 1
 

@@ -2,11 +2,6 @@ from prelims import Note
 from constraints import bach
 from search import *
 
-print('Running Bach tests...')
-
-import time
-start_time = time.time()
-
 bass_1 = [Note('C', 3), Note('D', 3), Note('E', 3), Note('G', 2), Note('C', 3)]
 find_1 = FindChords(bass_1)
 chords_1 = DFSSolve(find_1)
@@ -53,7 +48,7 @@ bass_6 = [Note('C', 2), Note('G', 2), Note('A', 2), Note('F', 2), Note('G', 2),
 find_6 = FindChords(bass_6)
 chords_6 = DFSSolve(find_6)
 v_6 = VoiceLeading(bass_6, chords_6, bach)
-voiced_6 = DFSSolve(v_6)   
+voiced_6 = DFSSolve(v_6)
 
 '''
 # from BWV 178: Wo Gott der Herr nicht bei uns halt

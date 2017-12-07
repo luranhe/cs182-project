@@ -14,7 +14,7 @@ def similar(*satbs):
                 all(a < b for a, b in zip(*satbs)))
 
 def parallel(n):
-    return lambda first, second: not all(f - s == n
+    return lambda first, second: not all(fix_num(f - s) == n
                                          for f, s in izip(first, second))
 
 def voice_overlap(first, second):
@@ -37,7 +37,8 @@ class ConstraintsAgg:
         self.basics = basics
         self.voice_pairs = voice_pairs
         self.voice_singles = voice_singles
-        self.ns = frozenset(set(basics.iterkeys()) | set(voice_pairs.iterkeys()) |
+        self.ns = frozenset(set(basics.iterkeys()) |
+                            set(voice_pairs.iterkeys()) |
                             set(voice_singles.iterkeys()))
 
     def test(self, satbs):
@@ -57,5 +58,5 @@ class ConstraintsAgg:
 
 
 bach = ConstraintsAgg({1: [crossvoice, spacing], 2: [similar]},
-                      {2: [parallel(5), parallel(8), voice_overlap]},
+                      {2: [parallel(5), parallel(1), voice_overlap]},
                       {2: [jump(5)], 3: [jump_more(3)], 5: [jump_more(2)]})

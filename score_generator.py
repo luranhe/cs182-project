@@ -1,43 +1,40 @@
-from sys import argv
 import abjad
-from itertools import izip
-from tests import voiced
 
-n = int(argv[1]) - 1
+def show_score(voiced_chords):
 
-#right format
-notes = []
-satb = [""] * 4
-for chord in voiced[n]:
-    for i, note in enumerate(chord):
-        octave = note.octave
-        name = str.lower(note.name)
-        name += ("'" * (octave - 3) * (octave > 3) +
-                 "," * (3 - octave) * (octave < 3) + "4 ")
+    def add2staff(voice1, voice2, staff):
+        voice1 = abjad.Voice(voice1)
+        command = abjad.indicatortools.LilyPondCommand('voiceOne')
+        abjad.attach(command, voice1)
+        voice2 = abjad.Voice(voice2)
+        command = abjad.indicatortools.LilyPondCommand('voiceTwo')
+        abjad.attach(command, voice2)
+        staff.extend([voice1, voice2])
+        staff.is_simultaneous = True
 
-        #builds the voices
-        satb[i] += name
+    #right format
+    notes = []
+    satb = [""] * 4
+    for chord in voiced_chords:
+        for i, note in enumerate(chord):
+            octave = note.octave
+            name = str.lower(note.name)
+            name += ("'" * (octave - 3) * (octave > 3) +
+                     "," * (3 - octave) * (octave < 3) + "4 ")
 
-soprano, alto, tenor, bass = satb
+            #builds the voices
+            satb[i] += name
 
-#build the score
+    soprano, alto, tenor, bass = satb
 
-upper_staff = abjad.Staff()
-lower_staff = abjad.Staff()
-satb_staff = abjad.StaffGroup([upper_staff, lower_staff])
+    #build the score
 
-def add2staff(voice1, voice2, staff):
-    voice1 = abjad.Voice(voice1)
-    command = abjad.indicatortools.LilyPondCommand('voiceOne')
-    abjad.attach(command, voice1)
-    voice2 = abjad.Voice(voice2)
-    command = abjad.indicatortools.LilyPondCommand('voiceTwo')
-    abjad.attach(command, voice2)
-    staff.extend([voice1, voice2])
-    staff.is_simultaneous = True
+    upper_staff = abjad.Staff()
+    lower_staff = abjad.Staff()
+    satb_staff = abjad.StaffGroup([upper_staff, lower_staff])
 
-add2staff(soprano, alto, upper_staff)
-add2staff(tenor, bass, lower_staff)
-abjad.attach(abjad.Clef('bass'), lower_staff[0])
+    add2staff(soprano, alto, upper_staff)
+    add2staff(tenor, bass, lower_staff)
+    abjad.attach(abjad.Clef('bass'), lower_staff[0])
 
-abjad.show(satb_staff)
+    abjad.show(satb_staff)

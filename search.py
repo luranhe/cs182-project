@@ -131,9 +131,9 @@ def DFSSolve(problem):
                 else:
                     res.pop()
         except StopIteration:
-            i -= 1
-            if i < 0 or i + 2 != len(possibilities):
+            if i <= 0 or i + 1 != len(possibilities):
                 raise problem.fail
+            i -= 1
             possibilities.pop()
             res.pop()
     return problem.to_output(res)

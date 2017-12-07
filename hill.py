@@ -26,7 +26,7 @@ def hill_climb(bassline, reps):
     bass_len = len(bassline)
     print('Initial Distance: ' + str(current_dist))
     print('Climbing...')
-    for e, i in enumerate(islice(cycle(xrange(bass_len)), reps)):
+    for i in islice(cycle(xrange(bass_len)), reps):
         bass = bassline[i]
         chord = chords_set[i]
         possibles = possibilities[i]

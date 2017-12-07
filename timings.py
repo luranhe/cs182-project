@@ -7,12 +7,11 @@ print('Running Bach tests...')
 
 start_time = time.time()
 
-for x in xrange(n):
+for _ in xrange(n):
     for b in basslines:
         bring_AI_bach(b)
 
-end_time = time.time()
-elapsed = end_time - start_time
+elapsed = time.time() - start_time
 print('Total time elapsed: ' + str(elapsed) + ' seconds')
 print('Total chorales voiced: ' + str(6 * n))
-print('Average voicing time: ' + str((elapsed / 60000.) * 1000) + ' ms')
+print('Average voicing time: ' + str((elapsed / (6 * n)) * 1000) + ' ms')

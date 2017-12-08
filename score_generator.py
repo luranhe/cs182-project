@@ -41,6 +41,7 @@ def show_score(voiced_chords):
     abjad.attach(abjad.Clef('bass'), lower_staff[0])
 
     abjad.show(satb_staff)
+    abjad.play(satb_staff)
 
 def main():
     print 'Choose your bassline:'
@@ -67,12 +68,22 @@ def ishill():
         print 'Proceeding with Backtracking Search'
     return b
 
+loading = 'Loading the result...'
+wait = ('(This may take a few seconds. ' +
+        'Once open, you may need to close the window to continue)')
+
 bass = main()
 if ishill():
     pre, post = hill_climb(bass, 1000)
-    print 'Here is the result from before hill climbing'
+    print 'Before hill climbing:'
+    print loading
+    print wait
     show_score(pre)
-    print 'And here is the result from after hill climbing'
+    print 'After hill climbing:'
+    print loading
+    print wait
     show_score(post)
 else:
+    print loading
+    print wait
     show_score(bring_AI_bach(bass))

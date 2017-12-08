@@ -1,5 +1,6 @@
 import time
-from tests import basslines, bring_AI_bach
+from search import bring_AI_bach
+from examples import basslines
 
 n = 1000
 

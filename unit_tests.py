@@ -1,7 +1,7 @@
+import unittest
 from prelims import *
 from constraints import *
 
-import unittest
 
 class TestNote(unittest.TestCase):
     def test_eq(self):

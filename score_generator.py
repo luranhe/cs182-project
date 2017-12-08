@@ -1,4 +1,7 @@
 import abjad
+from examples import basslines
+from search import bring_AI_bach
+from hill import hill_climb
 
 def show_score(voiced_chords):
 
@@ -38,3 +41,36 @@ def show_score(voiced_chords):
     abjad.attach(abjad.Clef('bass'), lower_staff[0])
 
     abjad.show(satb_staff)
+
+def main():
+    print 'Choose your bassline:'
+    print '0: Sample'
+    print '1: excerpt from BWV 43: Ermuntre dich, mein schwacher Geist'
+    print '2: excerpt from BWV 318: Gottes Sohn ist Kommen'
+    print '3: excerpt from BWV 376: Lobt Gott, ihr Christen allzugleich'
+    print '4: excerpt from BWV 248: Von Himmel hoch da komm ich her'
+    print '5: excerpt from BWV 414: Uns ist ein Kindlein heut geborn'
+    i = raw_input(' >>  ')
+    try:
+        return basslines[int(i)]
+    except (ValueError, IndexError) as _:
+        print 'Invalid input, please try again. :('
+        return main()
+
+def ishill():
+    print 'Hill climbing?'
+    i = raw_input('y/[n]')
+    b = i == 'y'
+    if b:
+        print 'Proceeding with Hill Climbing'
+    else:
+        print 'Proceeding with Backtracking Search'
+    return b
+
+bass = main()
+if ishill():
+    pre, post = hill_climb(bass)
+    show_score(pre)
+    show_score(post)
+else:
+    show_score(bring_AI_bach(bass))

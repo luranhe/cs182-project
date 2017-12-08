@@ -1,8 +1,8 @@
-from prelims import *
-from constraints import bach
-from search import *
 from random import choice, randint
 from itertools import izip, islice, cycle
+from prelims import voice_generator
+from constraints import bach
+from search import *
 
 def heuristic_dist(chord_list):
     total_dist = 0
@@ -21,7 +21,8 @@ def hill_climb(bassline, reps):
     chords_set = DFSSolve(find)
     voice = VoiceLeading(bassline, chords_set, bach)
     possibilities = [list(voice_generator(r)) for r in voice.recipes]
-    current_voicing = DFSSolve(voice)
+    voicing = DFSSolve(voice)
+    current_voicing = voicing[:]
     current_dist = heuristic_dist(current_voicing)
     bass_len = len(bassline)
     print('Initial Distance: ' + str(current_dist))
@@ -47,4 +48,4 @@ def hill_climb(bassline, reps):
             except ConstraintsViolated:
                 pass
     print('Final Distance: ' + str(current_dist))
-    return current_voicing
+    return voicing, current_voicing

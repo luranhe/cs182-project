@@ -2,6 +2,7 @@ from random import shuffle
 from itertools import imap, izip
 from abc import ABCMeta, abstractmethod, abstractproperty
 from prelims import fix_num, all_about_that_bass, voice_generator
+from constraints import bach
 
 
 class NoSatisfaction(Exception):
@@ -137,3 +138,10 @@ def DFSSolve(problem):
             possibilities.pop()
             res.pop()
     return problem.to_output(res)
+
+
+def bring_AI_bach(bassline):
+    find = FindChords(bassline)
+    chords = DFSSolve(find)
+    voice = VoiceLeading(bassline, chords, bach)
+    return DFSSolve(voice)

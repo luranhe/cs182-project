@@ -1,12 +1,5 @@
 from prelims import Note
-from constraints import bach
-from search import *
-
-def bring_AI_bach(bassline):
-    find = FindChords(bassline)
-    chords = DFSSolve(find)
-    voice = VoiceLeading(bassline, chords, bach)
-    return DFSSolve(voice)
+from search import bring_AI_bach
 
 basslines = []
 
@@ -46,5 +39,3 @@ bass = [Note('A', 3), Note('E', 3), Note('F', 3), Note('E', 3), Note('C', 3),
         Note('F', 3), Note('G', 3), Note('C', 3)]
 basslines.append(bass)
 '''
-
-voiced = [bring_AI_bach(b) for b in basslines]

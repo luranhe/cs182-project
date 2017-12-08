@@ -41,7 +41,7 @@ def show_score(voiced_chords):
     abjad.attach(abjad.Clef('bass'), lower_staff[0])
 
     abjad.show(satb_staff)
-    # abjad.play(satb_staff)
+    abjad.play(satb_staff)
 
 def main():
     print 'Choose your bassline:'

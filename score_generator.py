@@ -70,7 +70,7 @@ def ishill():
 
 loading = 'Loading the result...'
 wait = ('(This may take a few seconds. ' +
-        'Once open, you may need to close the window to continue)')
+        'Once open, you may need to close the windows to continue)')
 
 bass = main()
 if ishill():

@@ -59,18 +59,20 @@ def main():
 
 def ishill():
     print 'Hill climbing?'
-    i = raw_input('y/[n]')
+    i = raw_input('y/[n]: ')
     b = i == 'y'
     if b:
-        print 'Proceeding with Hill Climbing'
+        print 'Proceeding with Hill Climbing (1000 steps)'
     else:
         print 'Proceeding with Backtracking Search'
     return b
 
 bass = main()
 if ishill():
-    pre, post = hill_climb(bass)
+    pre, post = hill_climb(bass, 1000)
+    print 'Here is the result from before hill climbing'
     show_score(pre)
+    print 'And here is the result from after hill climbing'
     show_score(post)
 else:
     show_score(bring_AI_bach(bass))
